@@ -15,8 +15,8 @@ export MODULEPATH="/hpc/group/coursess25/ME511/modulefiles/:$MODULEPATH"
 export MODULEPATH="/hpc/group/coursess25/ME511/intel/oneapi/modulefiles/:$MODULEPATH"
 ```
 
->[!NOTICE]
->On some partitions, FHI-aims built with GNU compilers and OpenMPI cause issues. Therefore, FHI-aims is built on Intel oneAPI compilers, Intel MPI and Intel MKL math libraries. 
+> [!WARNING]  
+> On some partitions, FHI-aims built with GNU compilers and OpenMPI cause issues. Therefore, FHI-aims is built on Intel oneAPI compilers, Intel MPI and Intel MKL math libraries. 
 
 ### 1. Loading the pre-built module 
 
