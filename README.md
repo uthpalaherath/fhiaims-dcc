@@ -1,6 +1,6 @@
 # Running FHI-aims on the Duke Compute Cluster (DCC)
 
-[FHI-aims](https://fhi-aims.org)[^1] is an all-electron, electronic structure Density Functional Theory (DFT)[^3] code based on numeric atom-centered orbitals. It enables first-principles materials simulations with very high numerical accuracy for production calculations, with excellent scalability up to very large system sizes (thousands of atoms) and up to very large, massively parallel supercomputers (ten thousand CPU cores)[^2].
+[FHI-aims](https://fhi-aims.org) [^1] is an all-electron, electronic structure Density Functional Theory (DFT)[^3] code based on numeric atom-centered orbitals. It enables first-principles materials simulations with very high numerical accuracy for production calculations, with excellent scalability up to very large system sizes (thousands of atoms) and up to very large, massively parallel supercomputers (ten thousand CPU cores)[^2].
 
 > [!IMPORTANT]  
 > FHI-aims is a licensed code. If you are taking Dr. Volker Blum's ME511 class at Duke University, this is probably already taken care of. Otherwise, visit the FHI-aims website to obtain a license.  
@@ -29,7 +29,7 @@ export MODULEPATH="/hpc/group/coursess25/ME511/intel/oneapi/modulefiles/:$MODULE
 
 ### 1. Loading the pre-built module 
 
-This is essentially a pre-built executable built using [method \#2](#2.-building-from-source).
+This is essentially a pre-built executable built using [method \#2](#2-building-from-source).
 The FHI-aims module may be loaded with the following command,
 
 ```bash
