@@ -2,8 +2,8 @@
 
 [FHI-aims](https://fhi-aims.org) [^1] is an all-electron, electronic structure Density Functional Theory (DFT)[^3] code based on numeric atom-centered orbitals. It enables first-principles materials simulations with very high numerical accuracy for production calculations, with excellent scalability up to very large system sizes (thousands of atoms) and up to very large, massively parallel supercomputers (ten thousand CPU cores)[^2].
 
-> [!IMPORTANT]  
-> FHI-aims is a licensed code. If you are taking Dr. Volker Blum's ME511 class at Duke University, this is probably already taken care of. Otherwise, visit the FHI-aims website to obtain a license.  
+> [!IMPORTANT]
+> FHI-aims is a licensed code. If you are taking Dr. Volker Blum's ME511 class at Duke University, this is probably already taken care of. Otherwise, visit the FHI-aims website to obtain a license.
 
 ## Contents
 
@@ -17,17 +17,17 @@ There are two ways to access the FHI-aims code on the DCC cluster.
 1. Loading the pre-built module
 2. Building from source
 
-As a pre-requisite for both cases, append the dependency module locations to the $MODULEPATH environmental variable by adding the following to your `~/.bashrc`. 
+As a pre-requisite for both cases, append the dependency module locations to the $MODULEPATH environmental variable by adding the following to your `~/.bashrc`.
 
 ```bash
 export MODULEPATH="/hpc/group/coursess25/ME511/modulefiles/:$MODULEPATH"
 export MODULEPATH="/hpc/group/coursess25/ME511/intel/oneapi/modulefiles/:$MODULEPATH"
 ```
 
-> [!WARNING]  
-> On some DCC partitions, FHI-aims built with GNU compilers and OpenMPI terminates at runtime with MPI errors. Therefore, FHI-aims is built on Intel oneAPI compilers, Intel MPI and Intel MKL math libraries. 
+> [!WARNING]
+> On some DCC partitions, FHI-aims built with GNU compilers and OpenMPI terminates at runtime with MPI errors. Therefore, FHI-aims is built on Intel oneAPI compilers, Intel MPI and Intel MKL math libraries.
 
-### 1. Loading the pre-built module 
+### 1. Loading the pre-built module
 
 This is essentially a pre-built executable built using [method \#2](#2-building-from-source).
 The FHI-aims module may be loaded with the following command,
@@ -40,11 +40,11 @@ In addition to providing global access to the FHI-aims executable (now symlinked
 
 ### 2. Building from source
 
-This approach is useful if you are a developer and wish to modify the source code of FHI-aims for your desired purposes. 
+This approach is useful if you are a developer and wish to modify the source code of FHI-aims for your desired purposes.
 
 1\. Get the code from [FHI-aims](https://fhi-aims.org) and place it in your HOME space (e.g., "/hpc/home/ukh/apps/FHIaims/").
 
-2\. Assuming the intention is to build with an Intel environment, load the necessary compiler and library modules. 
+2\. Assuming the intention is to build with an Intel environment, load the necessary compiler and library modules.
 
 ```
 module load compiler/latest
@@ -85,13 +85,13 @@ cmake -C initial_cache.cmake ..
 make -j 8
 ```
 
-Following a successful build, the executable `aims.X.scalapack.mpi.x` ("X" refers to the version number) should be generated within the `build` directory.  
+Following a successful build, the executable `aims.X.scalapack.mpi.x` ("X" refers to the version number) should be generated within the `build` directory.
 
 ## Running FHI-aims on DCC
 
 To demonstrate running FHI-aims, we will use the GaAs_HSE06+SOC example, which is a periodic GaAs structure with hybrid functionals and a spin-orbit coupling (SOC) correction. The necessary input files (control.in and geometry.in) are provided in the GaAs_HSE06+SOC directory. Copy this to your WORK space (e.g., "/work/ukh/GaAs_HSE06+SOC") and use one of the following job submission scripts to run the calculation.
 
-### Basic 
+### Basic
 
 The basic run automatically sets the required number of nodes when the total number of cores are requested.
 
@@ -172,6 +172,9 @@ Run the calculation by submitting the job with the following command,
 ```
 sbatch jobscript-basic.sh
 ```
+
+> [!NOTE]
+> In case you are using FHI-aims purely for research purposes on DCC, you may have to use the "scavenger" partition for policy reasons. Replace "courses" with "scavenger" and add "#SBATCH --nodelist=dcc-courses-[1-50]" to your job submission script.
 
 For more information on running FHI-aims, please refer the [tutorials](https://fhi-aims-club.gitlab.io/tutorials/tutorials-overview/) webpage.
 
