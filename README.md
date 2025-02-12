@@ -174,7 +174,7 @@ sbatch jobscript-basic.sh
 ```
 
 > [!NOTE]
-> In case you are using FHI-aims purely for research purposes on DCC, you may have to use the "scavenger" partition for policy reasons. Replace "courses" with "scavenger" and add "#SBATCH --nodelist=dcc-courses-[1-50]" to your job submission script.
+> In case you are using FHI-aims purely for research purposes on DCC, you may have to use the "scavenger" partition for policy reasons. Replace "courses" with "scavenger" and add `#SBATCH --nodelist=dcc-courses-[1-50]` to the job submission script `jobscript-advanced.sh` above. Note that the flag `-N` has to be specified for this to work.
 
 For more information on running FHI-aims, please refer the [tutorials](https://fhi-aims-club.gitlab.io/tutorials/tutorials-overview/) webpage.
 
