@@ -19,9 +19,16 @@ There are two ways to access the FHI-aims code on the DCC cluster.
 
 As a pre-requisite for both cases, append the dependency module locations to the $MODULEPATH environmental variable by adding the following to your `~/.bashrc`.
 
+(a) If you are part of the ME511 course:
 ```bash
 export MODULEPATH="/hpc/group/coursess25/ME511/modulefiles/:$MODULEPATH"
 export MODULEPATH="/hpc/group/coursess25/ME511/intel/oneapi/modulefiles/:$MODULEPATH"
+```
+
+(b) If you are part of the Blum Lab:
+```bash
+export MODULEPATH="/hpc/group/blumlab/modulefiles/:$MODULEPATH"
+export MODULEPATH="/hpc/group/blumlab/intel/oneapi/modulefiles/:$MODULEPATH"
 ```
 
 > [!WARNING]
@@ -36,7 +43,7 @@ The FHI-aims module may be loaded with the following command,
 module load FHIaims-intel
 ```
 
-In addition to providing global access to the FHI-aims executable (now symlinked as `aims.x`), this also sets the `$SPECIES_DEFAULTS` environmental variable to access the basis set library and provides global access to scripts in `/hpc/group/coursess25/ME511/apps/FHIaims-intel/utilities`.
+In addition to providing global access to the FHI-aims executable (now symlinked as `aims.x`), this also sets the `$SPECIES_DEFAULTS` environmental variable to access the basis set library and provides global access to scripts in `/hpc/group/coursess25/ME511/apps/FHIaims-intel/utilities` (or `/hpc/group/blumlab/apps/FHIaims-intel/utilities`).
 
 ### 2. Building from source
 
@@ -145,6 +152,7 @@ If more control of resources is required, the following job submission script is
 ##SBATCH --mail-type=fail    # Send email at failed job
 ##SBATCH --mail-type=end     # Send email at end of job
 ##SBATCH --mail-user=your_email@duke.edu
+##SBATCH --mem=466G  # Memory per node
 
 # Initialization
 source ~/.bashrc
