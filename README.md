@@ -45,6 +45,12 @@ module load FHIaims-intel
 
 In addition to providing global access to the FHI-aims executable (now symlinked as `aims.x`), this also sets the `$SPECIES_DEFAULTS` environmental variable to access the basis set library and provides global access to scripts in `/hpc/group/coursess25/ME511/apps/FHIaims-intel/utilities` (or `/hpc/group/blumlab/apps/FHIaims-intel/utilities`).
 
+To run calculations with GPU acceleration enabled, load the following module instead,
+
+```bash
+module load FHIaims-intel-gpu
+```
+
 ### 2. Building from source
 
 This approach is useful if you are a developer and wish to modify the source code of FHI-aims for your desired purposes.
@@ -93,6 +99,29 @@ make -j 8
 ```
 
 Following a successful build, the executable `aims.X.scalapack.mpi.x` ("X" refers to the version number) should be generated within the `build` directory.
+
+#### Building with GPU support
+
+To build FHI-aims with GPU support, load the CUDA module in addition to the Intel modules and cmake.
+
+```
+module load compiler/latest
+module load mkl/latest
+module load mpi/latest
+module load cmake/3.28.3
+module load CUDA/12.4
+```
+
+Then add the following lines to the previous `initial_cache.cmake` file and follow the remaining steps as before.
+
+```
+########################### GPU Acceleration Flags #########################
+set(USE_CUDA ON CACHE BOOL "")
+set(CMAKE_CUDA_COMPILER nvcc CACHE STRING "")
+set(CMAKE_CUDA_FLAGS "-O3 -DAdd_ -arch=sm_60 -lcublas " CACHE STRING "")
+```
+
+The flag `-arch=sm_60` is used here to comply with the NVIDIA Pascal GPU architecture found in the NVIDIA Tesla P100 GPUs available in `dcc-courses-gpu` nodes.
 
 ## Running FHI-aims on DCC
 
@@ -146,13 +175,13 @@ If more control of resources is required, the following job submission script is
 #SBATCH -N 2              # Total no. of cores
 #SBATCH --ntasks-per-node=42  # Tasks per node
 #SBATCH -c 2                # CPU's per task
-#SBATCH --mem-per-cpu=5G    # Memory per CPU
+#SBATCH --mem=466G  # Memory per node
 
 ### --- OPTIONAL --- ###
 ##SBATCH --mail-type=fail    # Send email at failed job
 ##SBATCH --mail-type=end     # Send email at end of job
 ##SBATCH --mail-user=your_email@duke.edu
-##SBATCH --mem=466G  # Memory per node
+##SBATCH --mem-per-cpu=5G    # Memory per CPU
 
 # Initialization
 source ~/.bashrc
@@ -178,11 +207,58 @@ The parameter `-c 2` is essential to obtain the highest efficiency by pairing bo
 Run the calculation by submitting the job with the following command,
 
 ```
-sbatch jobscript-basic.sh
+sbatch jobscript-advanced.sh
+```
+
+For GPU calculations, use the following submission script,
+
+`jobscript-advanced-gpu.sh`:
+```bash
+#!/bin/bash
+#SBATCH -J GaAs_HSE06+SOC-advanced-gpu   # Job name
+#SBATCH -p courses-gpu        # Queue (partition) name
+#SBATCH -N 2              # Total no. of cores
+#SBATCH --ntasks-per-node=42  # Tasks per node
+#SBATCH -c 2                # CPU's per task
+#SBATCH --mem=466G  # Memory per node
+#SBATCH --gres=gpu:p100:2   # P100 GPU X2
+#SBATCH --exclusive
+
+### --- OPTIONAL --- ###
+##SBATCH --mail-type=fail    # Send email at failed job
+##SBATCH --mail-type=end     # Send email at end of job
+##SBATCH --mail-user=your_email@duke.edu
+##SBATCH --mem-per-cpu=5G    # Memory per CPU
+
+# Initialization
+source ~/.bashrc
+module load FHIaims-intel-gpu
+ulimit -s unlimited
+
+# Execution
+cd $SLURM_SUBMIT_DIR
+mpirun -n $SLURM_NTASKS aims.x > aims.out 2> aims.err
+
+### If you built from source, use the following instead.
+# module load compiler/latest
+# module load mkl/latest
+# module load mpi/latest
+# module load CUDA/12.4
+# ulimit -s unlimited
+
+# cd $SLURM_SUBMIT_DIR
+# mpirun -n $SLURM_NTASKS /hpc/home/ukh/apps/FHIaims/build_gpu/aims.X.scalapack.mpi.x > aims.out 2> aims.err
+```
+
+and ensure you have the following flags in your `control.in`.
+
+```
+use_gpu
+elsi_elpa_gpu 1
 ```
 
 > [!NOTE]
-> In case you are using FHI-aims purely for research purposes on DCC, you may have to use the "scavenger" partition for policy reasons. Replace "courses" with "scavenger" and add `#SBATCH --nodelist=dcc-courses-[1-50]` to the job submission script `jobscript-advanced.sh` above. Note that the flag `-N` has to be specified for this to work.
+> In case you are using FHI-aims purely for research purposes on DCC and don't have your own research nodes, you may have to use the "scavenger" partition for policy reasons. Replace "courses" with "scavenger" and add `#SBATCH --nodelist=dcc-courses-[1-50]` to the job submission script `jobscript-advanced.sh` above. Note that the flag `-N` has to be specified for this to work. For GPU calculations, use "scavenger-gpu" and `#SBATCH --nodelist=dcc-courses-gpu-[01-10]` instead.
 
 For more information on running FHI-aims, please refer the [tutorials](https://fhi-aims-club.gitlab.io/tutorials/tutorials-overview/) webpage.
 
