@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -J GaAs_HSE06+SOC-advanced   # Job name
 #SBATCH -p courses        # Queue (partition) name
-#SBATCH -N 2              # Total no. of cores
+#SBATCH -N 2              # Total no. of nodes
 #SBATCH --ntasks-per-node=42  # Tasks per node
 #SBATCH -c 2                # CPU's per task
 #SBATCH --mem-per-cpu=5G    # Memory per CPU
