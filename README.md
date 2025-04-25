@@ -114,7 +114,7 @@ module load CUDA/12.4
 
 Then add the following lines to the previous `initial_cache.cmake` file and follow the remaining steps as before.
 
-```
+```cmake
 ########################### GPU Acceleration Flags #########################
 set(USE_CUDA ON CACHE BOOL "")
 set(CMAKE_CUDA_COMPILER nvcc CACHE STRING "")
