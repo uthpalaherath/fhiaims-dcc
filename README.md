@@ -2,6 +2,8 @@
 
 [FHI-aims](https://fhi-aims.org) [^1] is an all-electron, electronic structure Density Functional Theory (DFT)[^3] code based on numeric atom-centered orbitals. It enables first-principles materials simulations with very high numerical accuracy for production calculations, with excellent scalability up to very large system sizes (thousands of atoms) and up to very large, massively parallel supercomputers (ten thousand CPU cores)[^2].
 
+I am grateful for the support recieved from the Duke Research Computing Team to get all of this to work smoothly. 
+
 > [!IMPORTANT]
 > FHI-aims is a licensed code. If you are taking Dr. Volker Blum's ME511 class at Duke University, this is probably already taken care of. Otherwise, visit the FHI-aims website to obtain a license.
 
