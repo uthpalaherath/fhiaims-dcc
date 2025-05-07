@@ -273,11 +273,11 @@ jobstats.sh <JOBID>
 `JOBID` is the ID of the job submitted through `sbatch`, which can be found from the `squeue` command.
 Please refer to [this article](https://uthpalaherath.com/Advanced-resource-monitoring-on-HPC-clusters/) for further guidance on using this script.
 
-# Acknowledgements
+## Acknowledgements
 
 I am grateful for the support I recieved from the Duke Research Computing Team to get all of this to work smoothly. 
 
-# Reference
+## Reference
 
 [^1]: V. Blum, R. Gehrke, F. Hanke, P. Havu, V. Havu, X. Ren, K. Reuter, and M. Scheffler, Ab initio molecular simulations with numeric atom-centered orbitals, Computer Physics Communications 180, 2175 (2009). DOI: [https://doi.org/10.1016/j.cpc.2009.06.022](https://doi.org/10.1016/j.cpc.2009.06.022)
 
