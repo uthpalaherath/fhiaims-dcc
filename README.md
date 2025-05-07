@@ -273,7 +273,7 @@ jobstats.sh <JOBID>
 `JOBID` is the ID of the job submitted through `sbatch`, which can be found from the `squeue` command.
 Please refer to [this article](https://uthpalaherath.com/Advanced-resource-monitoring-on-HPC-clusters/) for further guidance on using this script.
 
-### Acknowledgements
+# Acknowledgements
 
 I am grateful for the support I recieved from the Duke Research Computing Team to get all of this to work smoothly. 
 
