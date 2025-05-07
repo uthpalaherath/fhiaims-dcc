@@ -5,8 +5,6 @@
 > [!IMPORTANT]
 > FHI-aims is a licensed code. If you are taking Dr. Volker Blum's ME511 class at Duke University, this is probably already taken care of. Otherwise, visit the FHI-aims website to obtain a license.
 
-I am grateful for the support I recieved from the Duke Research Computing Team to get all of this to work smoothly. 
-
 ## Contents
 
 - [Accessing FHI-aims on DCC](#accessing-fhi-aims-on-dcc)
@@ -274,6 +272,9 @@ jobstats.sh <JOBID>
 
 `JOBID` is the ID of the job submitted through `sbatch`, which can be found from the `squeue` command.
 Please refer to [this article](https://uthpalaherath.com/Advanced-resource-monitoring-on-HPC-clusters/) for further guidance on using this script.
+
+**Acknowledgements**
+I am grateful for the support I recieved from the Duke Research Computing Team to get all of this to work smoothly. 
 
 # Reference
 
